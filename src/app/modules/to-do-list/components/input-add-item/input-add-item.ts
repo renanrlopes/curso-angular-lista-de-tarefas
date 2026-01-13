@@ -41,6 +41,7 @@ export class InputAddItem {
         id,
         checked: false,
         value,
+        createdAt: currentDate.toISOString(),
       });
 
       return this.inputText.nativeElement.focus();

@@ -18,8 +18,13 @@ export class List {
   #setListItems = signal<IListItems[]>(this.#parseItems());
   public getListItems = this.#setListItems.asReadonly();
 
-  #parseItems() {
-    return JSON.parse(localStorage.getItem(ELocalStorage.MY_LIST) || '[]');
+  #parseItems(): IListItems[] {
+    return JSON.parse(
+      localStorage.getItem(ELocalStorage.MY_LIST) || '[]'
+    ).map((item: IListItems) => ({
+      ...item,
+      createdAt: item.createdAt || new Date().toISOString(),
+    }));
   }
 
   #updateLocalStorage() {
